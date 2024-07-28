@@ -1,0 +1,65 @@
+
+    <div class="d-flex flex-column align-items-center justify-content-center full-height p-5">
+        <div class="card text-center">
+        <div class="card-header p-3">
+            Proveedor número: <?php echo $proveedor->id_provn ?>
+        </div>
+        <div class="card-body p-5">
+            <h5 class="card-title font-weight-bold">Nombre: <?php echo $proveedor->nombre ?></h5>
+            <p class="card-text"><?php echo $proveedor->descripcion ?></p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Numero de teléfono: <?php echo $proveedor->num ?></li>
+            <li class="list-group-item">E-mail: <?php echo $proveedor->mail ?></li>
+            <?php if(isset($_SESSION['LOGUEADO'])){ ?>
+            <li class="list-group-item"> <a href="<?php echo BASE_URL . 'eliminarProv' . '/' . $proveedor->id_provn; ?>">
+                    <button type="button" class="btn btn-danger btn-sm p-2 m-1">Borrar</button>
+                </a>
+            </li>
+            <?php } ?>
+        </ul>
+        </div>
+    </div>
+    <?php if(isset($_SESSION['LOGUEADO'])){ ?>
+        <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Modificar este proveedor
+            </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <form class="was-validated" method="post" action="<?php echo BASE_URL; ?>actualizarProv">
+                    <div class="mb-3">
+                        <label for="prov" class="form-label">Nombre del proveedor</label>
+                        <input type="text" class="form-control form-control-sm form-control" id="prov" name="provNombre" required>
+                        <div class="valid-feedback">Nombre valido</div>
+                        <div class="invalid-feedback">Por favor ingrese un nombre valido</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Mail del proveedor</label>
+                        <input type="email"  class="form-control form-control-sm" id="mail" name="eMail" required>
+                        <div class="valid-feedback">Mail valido</div>
+                        <div class="invalid-feedback">Por favor ingrese un mail valido</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tel" class="form-label">Teléfono del proveedor</label>
+                        <input type="tel"  class="form-control form-control-sm" id="tel" name="tel" pattern="[0-9]{8,15}"  required>
+                        <div class="valid-feedback">Teléfono valido</div>
+                        <div class="invalid-feedback">Por favor ingrese un teléfono valido</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="desc" class="form-label">Descripción</label>
+                        <input type="text" class="form-control form-control-sm" id="desc" name="provDesc" required>
+                        <div class="valid-feedback">Descripción valida</div>
+                        <div class="invalid-feedback">Por favor ingrese una descripción valida</div>
+                    </div>
+                    <input type="hidden" name="idProvn" id="idP" value="<?php echo $proveedor->id_provn ?>">
+                    <button type="submit" class="btn btn-primary">Modificar</button>
+                </form>
+            </div>
+            </div>
+        </div>
+    <?php } ?>
+</div>

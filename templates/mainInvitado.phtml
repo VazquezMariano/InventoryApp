@@ -1,0 +1,73 @@
+<div class="table-responsive">
+  <?php if(isset($_SESSION['LOGUEADO'])){ ?>
+  <form class="was-validated" method="post" action="porcentaje">
+  <?php } ?>
+      <table class="table table-hover table-bordered" id="tabla">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Precio</th>
+            <th scope="col" colspan="3">Detalles</th>
+            <th scope="col">Proveedor</th>
+            <?php if(isset($_SESSION['LOGUEADO'])){ ?>
+            <th></th>
+            <th></th>
+            <?php } ?>
+          </tr>
+        </thead>
+        <tbody>
+        <?php foreach($productos as $producto){
+          ?>
+          <tr>
+            <th scope="row"><?php echo $producto->id_producto ?></th>
+            <td><?php echo $producto->nombre ?></td>
+            <td><?php echo "$" . $producto->precio ?></td>
+            <td colspan="3"><?php echo $producto->descripcion ?></td>
+            <td>
+              <?php 
+                  foreach($proveedores as $proveedor){
+                      if($proveedor->id_provn == $producto->id_prov){
+                          echo "<a class='card-link' href='proveedor/" . $proveedor->id_provn . "'>" . $proveedor->nombre ."</a>";
+                      }
+                  }
+              ?>
+              </td>
+              <?php if(isset($_SESSION['LOGUEADO'])){ ?>
+              <th>
+                <input type="checkbox" value="<?php echo $producto->id_producto ?>" id="flexCheckDefault" name="elementos[]">
+              </th>
+              <th>
+                <a href="eliminarProd/<?php echo $producto->id_producto?>">
+                  <button type="button" class="btn btn-danger btn-sm">Borrar</button>
+                </a>
+              </th>
+              <th>
+                <a href="editar/<?php echo $producto->id_producto ?>">
+                  <button type="button" class="btn btn-primary btn-sm" id="editButton">Editar</button>
+                </a>
+              </th>
+              <?php } ?>
+              
+          </tr>
+          <?php 
+              }
+          ?>
+        </tbody>
+      </table>
+      <?php if(isset($_SESSION['LOGUEADO'])){ ?>
+        <div class="input-group mb-3">
+          <div>
+            <select class="form-select" aria-label="Default select example" name="modalidad">
+              <option value="aum">Aumentar</option>
+              <option value="dis">Disminuir</option>
+            </select>
+          </div>
+          <input type="number"  step="0.1" class="form-control" aria-label="Text input with dropdown button" name="porcentaje" required>
+          <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Enviar</button>
+        </div>
+        <?php } ?>
+  <?php if(isset($_SESSION['LOGUEADO'])){ ?>
+  </form>
+  <?php } ?>
+</div>

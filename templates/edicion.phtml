@@ -1,0 +1,42 @@
+<div class="table-responsive">
+  <form method="post" action="<?php echo BASE_URL; ?>procEdicion">
+  <table class="table table-hover table-bordered" id="tabla">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Producto</th>
+        <th scope="col">Precio</th>
+        <th scope="col" colspan="3">Detalles</th>
+        <th scope="col">Proveedor</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row"><?php echo $producto->id_producto ?></th>
+        <td><?php echo $producto->nombre ?></td>
+        <td><?php echo "$" . $producto->precio ?></td>
+        <td colspan="3"><?php echo $producto->descripcion ?></td>
+        <td><?php echo "<a class='card-link' href='noentro'>" . $proveedor->nombre ."</a>"; ?>
+        </td>
+      </tr>
+      <tr>
+        <th><input type="hidden" name="idProducto" id="idP" value="<?php echo $producto->id_producto ?>"></th>
+        <td><input type="text" name="nombreProducto" id="nombreP"></td>
+        <td><input type="number" step="0.01" name="precioProducto" id="precioP"></td>
+        <td colspan="3"><input type="text" name="descripcionProducto" id="descP"></td>
+        <td><select name="proveedorProducto" id="provP">
+        <?php foreach($proveedores as $prov){ ?>
+                        <option value="<?php echo $prov->id_provn ?>"><?php echo $prov->nombre ?></option>
+                    <?php } ?>
+        </select></td>
+        <td>
+          <a href="">
+            <button type="submit" class="btn btn-primary btn-sm" id="editButton">Editar</button>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </form>
+</div>

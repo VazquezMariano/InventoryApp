@@ -1,0 +1,16 @@
+<div class="mt-5 d-flex justify-content-center align-items-center">
+    <div class="alert alert-danger" role="alert" id="cartel">
+    <h4 class="alert-heading">Error</h4>
+    <p><?php echo $msj ?></p>
+    <hr>
+    <p class="mb-0">No te preocupes ¡Podés volver a intentarlo!</p>
+    </div>
+</div>
+
+<script>
+    let cartel = document.getElementById("cartel");
+    setTimeout(() =>{
+        cartel.classList.add("d-none");
+
+    }, 2000)
+</script>
